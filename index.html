@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeStream - Social Feed</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Notifications/Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Auth Section -->
+    <section id="auth-section" class="active">
+        <div class="auth-container glass-panel">
+            <div class="brand-logo">
+                <i class="fa-solid fa-bolt"></i>
+                <h1>VibeStream</h1>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Login to continue sharing your vibe.</p>
+                <form id="form-login">
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Log In</button>
+                </form>
+                <p class="switch-auth">Don't have an account? <span id="show-signup">Sign Up</span></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join the community today.</p>
+                <form id="form-signup">
+                    <div class="input-group">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="signup-name" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="signup-email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                </form>
+                <p class="switch-auth">Already have an account? <span id="show-login">Log In</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main App Section -->
+    <section id="app-section">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="container header-content">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>VibeStream</span>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search posts...">
+                </div>
+
+                <div class="header-actions">
+                    <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" id="header-avatar">
+                        <span id="header-username">User</span>
+                        <button id="logout-btn" class="icon-btn-small" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container main-layout">
+            <!-- Left Sidebar (Optional/Profile) -->
+            <aside class="sidebar-left">
+                <div class="glass-card profile-card">
+                    <div class="profile-bg"></div>
+                    <div class="profile-info">
+                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" id="sidebar-avatar">
+                        <h3 id="sidebar-username">User Name</h3>
+                        <p class="user-handle">@username</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="user-posts-count">0</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="user-likes-count">0</span>
+                            <span class="stat-label">Likes</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Feed Area -->
+            <section class="feed-area">
+                <!-- Create Post -->
+                <div class="glass-card create-post-card">
+                    <div class="create-post-header">
+                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" id="create-post-avatar">
+                        <textarea id="post-text" placeholder="What's on your mind?"></textarea>
+                    </div>
+                    <div class="create-post-preview" id="image-preview-container" style="display: none;">
+                        <img id="image-preview" src="" alt="Preview">
+                        <button id="remove-image-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="create-post-actions">
+                        <div class="action-left">
+                            <button class="action-btn" id="add-image-btn" title="Add Image URL">
+                                <i class="fa-regular fa-image"></i> Photo
+                            </button>
+                            <!-- Hidden input for image URL logic -->
+                            <div id="image-url-input-wrapper" class="popover-input hidden">
+                                <input type="text" id="post-image-url" placeholder="Paste image URL...">
+                                <button id="confirm-image-url"><i class="fa-solid fa-check"></i></button>
+                            </div>
+                        </div>
+                        <button id="post-submit-btn" class="btn-primary">Post</button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="feed-filters">
+                    <button class="filter-btn active" data-sort="latest">Latest</button>
+                    <button class="filter-btn" data-sort="oldest">Oldest</button>
+                    <button class="filter-btn" data-sort="popular">Popular</button>
+                </div>
+
+                <!-- Posts Container -->
+                <div id="posts-feed">
+                    <!-- Posts will be injected here -->
+                </div>
+            </section>
+
+            <!-- Right Sidebar (Trending/Suggestions) -->
+            <aside class="sidebar-right">
+                <div class="glass-card trending-card">
+                    <h3>Trending Topics</h3>
+                    <ul class="trending-list">
+                        <li>#CodingNight</li>
+                        <li>#WebDevelopment</li>
+                        <li>#JavaScript</li>
+                        <li>#Design</li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </section>
+
+    <!-- Edit Post Modal -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3>Edit Post</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="edit-post-text"></textarea>
+                <input type="text" id="edit-post-image" placeholder="Image URL (optional)">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-modal">Cancel</button>
+                <button id="save-edit-btn" class="btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
